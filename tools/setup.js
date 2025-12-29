@@ -78,28 +78,35 @@ function replaceInFile(filePath, replacements) {
   }
 }
 
-function removeSetupWarningFromReadme(rootDir) {
+function removeSectionFromReadme(rootDir, marker) {
   const readmePath = path.join(rootDir, 'README.md');
 
   if (!fs.existsSync(readmePath)) {
-    console.log('  No README.md found, skipping setup warning removal');
+    console.log(`  No README.md found, skipping ${marker} section removal`);
     return;
   }
 
   try {
     let content = fs.readFileSync(readmePath, 'utf8');
 
-    // Remove the setup warning block
-    const setupWarningRegex = /<!-- SETUP START -->[\s\S]*?<!-- SETUP END -->\n*/;
-    const newContent = content.replace(setupWarningRegex, '');
+    const sectionRegex = new RegExp(`<!-- ${marker} START -->[\\s\\S]*?<!-- ${marker} END -->\\n*`);
+    const newContent = content.replace(sectionRegex, '');
 
     if (content !== newContent) {
       fs.writeFileSync(readmePath, newContent, 'utf8');
-      console.log('✓ Removed setup warning from README.md');
+      console.log(`✓ Removed ${marker} section from README.md`);
     }
   } catch (error) {
     console.error('  Could not update README.md:', error.message);
   }
+}
+
+function removeSetupWarningFromReadme(rootDir) {
+  removeSectionFromReadme(rootDir, 'SETUP');
+}
+
+function removeDistributionFromReadme(rootDir) {
+  removeSectionFromReadme(rootDir, 'DISTRIBUTION');
 }
 
 function renamePaths(dirPath, replacements) {
@@ -166,13 +173,6 @@ async function main() {
     replacements['EXPANSION_CURRENT_YEAR'] = currentYear.toString();
 
     licenseSetup = true;
-  } else {
-    const licensePath = path.join(rootDir, 'LICENSE');
-
-    if (fs.existsSync(licensePath)) {
-      fs.unlinkSync(licensePath);
-      console.log('✓ Removed LICENSE file as per user request');
-    }
   }
 
   // Prompt for remote download URL (optional)
@@ -187,6 +187,15 @@ async function main() {
 
   if (remoteUrl.endsWith('/')) {
     remoteUrl = remoteUrl.slice(0, -1);
+  }
+
+  let isRemoteUrlR2 = false;
+
+  // Ask the user to confirm if the URL is an R2 URL
+  if (remoteUrl) {
+    const isR2Answer = (await question('Is this URL a Cloudflare R2 URL? (y/N): ')).trim().toLowerCase();
+
+    isRemoteUrlR2 = (isR2Answer === 'y');
   }
 
   rl.close();
@@ -230,6 +239,26 @@ async function main() {
   console.log('\n🔄 Cleaning up...\n');
 
   removeSetupWarningFromReadme(rootDir);
+
+  if (!licenseSetup) {
+    const licensePath = path.join(rootDir, 'LICENSE');
+
+    if (fs.existsSync(licensePath)) {
+      fs.unlinkSync(licensePath);
+      console.log('✓ Removed LICENSE file as per user request');
+    }
+  }
+
+  if (!isRemoteUrlR2) {
+    const workflowPath = path.join(rootDir, '.github', 'workflows', 'sync-to-r2.yml');
+
+    if (fs.existsSync(workflowPath)) {
+      fs.unlinkSync(workflowPath);
+      console.log('✓ Removed sync-to-r2.yml workflow since no remote URL was provided');
+    }
+
+    removeDistributionFromReadme(rootDir);
+  }
 
   console.log('\n✅ Setup complete!');
   console.log('💡 The setup warning has been removed from README.md');

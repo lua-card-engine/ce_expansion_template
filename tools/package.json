@@ -9,8 +9,6 @@
         "convert": "node convert.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "luttje",
-    "license": "MIT",
     "dependencies": {
         "png-to-vtf": "^0.2.0"
     }

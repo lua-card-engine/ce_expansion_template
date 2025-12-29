@@ -76,7 +76,7 @@ To use this expansion set in your Garry's Mod server, follow these steps:
             │   └── ...
             └── ...
     ```
-
+<!-- DISTRIBUTION START -->
 ## 📦 Distribution
 
 The files in this expansion set are distributed through Cloudflare R2. See [the `sync-to-r2` GitHub Action configuration](.github/workflows/sync-to-r2.yml) to understand how the distribution works.
@@ -104,6 +104,7 @@ To enable the automatic synchronization to Cloudflare R2, you need to set up the
 Additionally, add this variable to the repository, to specify the expansion subfolder in the R2 bucket:
 
 - `EXPANSION_FOLDER`: Set this to `{{ EXPANSION_ID }}` for this expansion set.
+<!-- DISTRIBUTION END -->
 
 ## 🛠️ Tools
 
