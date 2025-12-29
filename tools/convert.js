@@ -1,9 +1,13 @@
 import { convertPNGToVTF, VTF_FORMATS } from 'png-to-vtf';
 import { readdir } from 'fs/promises';
-import { join, basename, extname } from 'path';
+import { join, basename, extname, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const designDir = '../design';
-const outputDir = '../materials/card_engine/expansions/{{ EXPANSION_ID }}';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const designDir = join(__dirname, '..', 'design');
+const outputDir = join(__dirname, '..', 'materials', 'card_engine', 'expansions', '{{ EXPANSION_ID }}');
 
 const files = await readdir(designDir);
 const pngFiles = files.filter(file => extname(file).toLowerCase() === '.png');
