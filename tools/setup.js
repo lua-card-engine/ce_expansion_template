@@ -114,7 +114,7 @@ function renamePaths(dirPath, replacements) {
 
   // Process files and directories
   items.forEach((item) => {
-    if (item === 'node_modules' || item === '.git' || item === 'tools') {
+    if (item === 'node_modules' || item === '.git' || item === 'setup.js') {
       return;
     }
 
