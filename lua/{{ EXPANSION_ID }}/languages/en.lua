@@ -10,6 +10,7 @@ return {
 		Cards
 	--]]
 
-	-- ["{{ EXPANSION_ID }}_first_card"] = "First Card",
-	-- ["{{ EXPANSION_ID }}_first_card_description"] = "Example description for the first card in the {{ EXPANSION_NAME }} expansion set.",
+	["{{ EXPANSION_ID }}_first_card"] = "First Card",
+	["{{ EXPANSION_ID }}_first_card_description"] =
+	"Example description for the first card in the {{ EXPANSION_NAME }} expansion set.",
 }
