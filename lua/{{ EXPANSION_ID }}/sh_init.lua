@@ -6,11 +6,6 @@ hook.Add(
 	"CardEngineInitializeExpansionPacks",
 	"CardEngine.{{ EXPANSION_ID_PASCAL_CASE }}.InitializeExpansionPack",
 	function()
-		if (not CardEngine) then
-			ErrorNoHalt("Card Engine not found! Expansion pack '{{ EXPANSION_ID }}' will not load.\n")
-			return
-		end
-
 		local EXPANSION_SET_ID = "{{ EXPANSION_ID }}"
 
 		-- Register the expansion set with its metadata and filterable attributes
