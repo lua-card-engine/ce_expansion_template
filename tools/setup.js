@@ -38,8 +38,8 @@ function getAllFiles(dirPath, arrayOfFiles = []) {
   files.forEach((file) => {
     const filePath = path.join(dirPath, file);
 
-    // Skip node_modules, .git, and tools directories
-    if (file === 'node_modules' || file === '.git' || file === 'tools') {
+    // Skip node_modules and .git directories, and the setup script itself
+    if (file === 'node_modules' || file === '.git' || file === 'setup.js') {
       return;
     }
 
