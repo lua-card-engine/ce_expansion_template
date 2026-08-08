@@ -17,6 +17,6 @@ CARD.CardSize = CardEngine.DEFAULT_CARD_MODELS.COMMON
 -- CARD.HolographicTexture = "card_engine/holo_rainbow_strong"
 
 CARD.Attributes = {
-	Rarity = "common",
+	Rarity = "Common",
 	Supertype = "Trainer",
 }
