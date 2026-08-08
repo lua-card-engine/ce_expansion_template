@@ -7,6 +7,7 @@
     "scripts": {
         "setup": "node setup.js",
         "convert": "node convert.js",
+        "concat-cards": "node concat_cards.js ../lua/{{ EXPANSION_ID }}/cards",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
