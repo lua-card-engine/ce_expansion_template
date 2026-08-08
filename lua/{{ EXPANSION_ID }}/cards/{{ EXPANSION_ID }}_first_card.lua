@@ -20,3 +20,16 @@ CARD.Attributes = {
 	Rarity = "Common",
 	Supertype = "Trainer",
 }
+
+-- Do not use file-level guards, or the concat-cards tool will not be able to combine multiple card files into a single file. Instead
+-- use normal if-statements. So don't do this:
+-- if (not SERVER) then
+-- 		return -- BAD! Don't do this!
+-- end
+-- Use a normal if-statement like this:
+if (SERVER) then
+	-- You can give a card using a hook. For example to give this card when someone joins the server, you can use the following code:
+	-- function CARD.hooks:PlayerInitialSpawn(player)
+	-- 	CardEngine.Collection.AddCard(player, self.UniqueID)
+	-- end
+end

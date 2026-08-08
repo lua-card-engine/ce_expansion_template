@@ -61,7 +61,13 @@ function buildCardBlock(fileName, directoryPath, source) {
   lines.splice(
     localCardLineIndex,
     1,
+    // Required as local CARD = CARD only makes sense when the engine injects a global CARD table before including the file
     'local CARD = {}',
+
+    // Copied from the CardEngine.Collection.CreateNew() so hooks function the same in the concatenated output as they do in the original individual card files
+    'CARD.hooks = setmetatable({}, { __index = CARD })',
+
+    // Since the loader cannot inject these values anymore, we set them explicitly in the concatenated output so that hooks can use them
     `CARD.FileName = "${fileName}"`,
     `CARD.FilePath = "${filePath}"`
   );
