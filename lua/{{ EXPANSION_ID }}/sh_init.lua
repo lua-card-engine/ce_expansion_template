@@ -12,7 +12,6 @@ hook.Add(
 		CardEngine.ExpansionSet.Register({
 			UniqueID = EXPANSION_SET_ID,
 			Name = "expansion_set_{{ EXPANSION_ID }}",
-			Image = "card_engine/expansions/{{ EXPANSION_ID }}/set_logo.png",
 {{ EXPANSION_REMOTE_DOWNLOAD_URL_LINE }}
 			-- Define which attributes should appear as filters in the collection menu
 			FilterableAttributes = {
