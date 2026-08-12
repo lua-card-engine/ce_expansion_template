@@ -45,7 +45,9 @@ hook.Add(
 		-- Method 2: Load all cards from a single file (recommended to reduce amount of files in the expansion pack)
 		-- Use tools/concat_cards.js to combine all card files into a single file for this method
 		--[[
-		local ALL_CARDS = include(CardEngine.PathCombine("{{ EXPANSION_ID }}", "cards/sh_all_cards.lua"))
+		local sharedFilePath = CardEngine.PathCombine("{{ EXPANSION_ID }}", "cards/sh_all_cards.lua")
+		AddCSLuaFile(sharedFilePath)
+		local ALL_CARDS = include(sharedFilePath)
 
 		CardEngine.Collection.IncludeRegistrations(
 			ALL_CARDS,
