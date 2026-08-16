@@ -3,8 +3,8 @@ CardEngine.ExpansionSets = CardEngine.ExpansionSets or {}
 CardEngine.ExpansionSets.{{ EXPANSION_ID_PASCAL_CASE }} = CardEngine.ExpansionSets.{{ EXPANSION_ID_PASCAL_CASE }} or {}
 
 hook.Add(
-	"CardEngineInitializeExpansionPacks",
-	"CardEngine.{{ EXPANSION_ID_PASCAL_CASE }}.InitializeExpansionPack",
+	"CardEngineInitializeExpansionSets",
+	"CardEngine.{{ EXPANSION_ID_PASCAL_CASE }}.InitializeExpansionSet",
 	function()
 		local EXPANSION_SET_ID = "{{ EXPANSION_ID }}"
 
@@ -29,20 +29,20 @@ hook.Add(
 		})
 
 		--------------------------------------------------------------------------------------
-		--- Choose ONE of the following two methods to load cards for this expansion pack. ---
+		--- Choose ONE of the following two methods to load cards for this expansion set. ---
 		--------------------------------------------------------------------------------------
 
 		-- Method 1: Load all cards from a directory of files
 		CardEngine.Collection.IncludeDirectory(
 			CardEngine.PathCombine("{{ EXPANSION_ID }}", "cards/"),
 			nil,
-			-- Automatically inject the ExpansionSet property into all cards loaded from this expansion pack
+			-- Automatically inject the ExpansionSet property into all cards loaded from this expansion set
 			function(fileName, cardFilePath)
 				CARD.ExpansionSet = EXPANSION_SET_ID
 			end
 		)
 
-		-- Method 2: Load all cards from a single file (recommended to reduce amount of files in the expansion pack)
+		-- Method 2: Load all cards from a single file (recommended to reduce amount of files in the expansion set)
 		-- Use tools/concat_cards.js to combine all card files into a single file for this method
 		--[[
 		local sharedFilePath = CardEngine.PathCombine("{{ EXPANSION_ID }}", "cards/sh_all_cards.lua")
@@ -51,7 +51,7 @@ hook.Add(
 
 		CardEngine.Collection.IncludeRegistrations(
 			ALL_CARDS,
-			-- Automatically inject the ExpansionSet property into all cards loaded from this expansion pack
+			-- Automatically inject the ExpansionSet property into all cards loaded from this expansion set
 			function(fileName, cardFilePath)
 				CARD.ExpansionSet = EXPANSION_SET_ID
 			end

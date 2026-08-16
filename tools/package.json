@@ -1,7 +1,7 @@
 {
     "name": "ce_expansion_tools",
     "version": "0.1.0",
-    "description": "Tools for {{ EXPANSION_ID }} expansion pack",
+    "description": "Tools for {{ EXPANSION_ID }} expansion set",
     "main": "index.js",
     "type": "module",
     "scripts": {
