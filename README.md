@@ -51,11 +51,13 @@ To use this expansion set in your Garry's Mod server, follow these steps:
 
 1. Ensure CardEngine is installed on your Garry's Mod server.
 
-2. Download or clone this repository to your local machine into a `{{ EXPANSION_ID }}` folder.
+2. Download this repository to your local machine.
 
-3. Copy that entire `{{ EXPANSION_ID }}` folder into the `addons/` directory of your Garry's Mod installation.
+3. Extract the downloaded zip file into the `garrysmod/addons/` directory of your Garry's Mod installation.
 
-4. After the above steps, the folder structure should look like this:
+4. (Optional) After downloading from git the folder will be named `{{ EXPANSION_ID }}-main`. Rename it to `{{ EXPANSION_ID }}`, which is a cleaner name.
+
+5. After the above steps, the folder structure should look like this:
 
     ```plaintext
     garrysmod/
@@ -76,6 +78,9 @@ To use this expansion set in your Garry's Mod server, follow these steps:
             │   └── ...
             └── ...
     ```
+
+**That's it!** You can now (re)start your Garry's Mod game/server and enjoy the {{ EXPANSION_NAME }} Expansion Set in CardEngine.
+
 <!-- DISTRIBUTION START -->
 ## 📦 Distribution
 
